@@ -1,0 +1,9 @@
+.sign {
+    max-width: 358px;
+    height: calc(100vh - 260px);
+    margin: 0 auto;
+    padding: 60px 15px 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

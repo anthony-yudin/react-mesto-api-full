@@ -1,0 +1,11 @@
+.profile__fio-box {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 14px;
+}
+
+@media screen and (min-width: 768px) {
+    .profile__fio-box {
+        margin-bottom: 16px;
+    }
+}

@@ -1,0 +1,15 @@
+.popup__btn_disabled {
+    color: #000000;
+    opacity: .2;
+    background: #fff;
+    cursor: no-drop;
+    border: 1px solid #000000;
+}
+
+.popup__btn_disabled:hover {
+    opacity: .2;
+}
+
+.popup__btn_disabled:focus {
+    outline: none;
+}

@@ -1,0 +1,6 @@
+@media screen and (min-width: 768px) {
+    .profile__info {
+        display: flex;
+        align-items: center;
+    }
+}

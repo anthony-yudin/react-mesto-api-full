@@ -1,0 +1,14 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px 27px 31px;
+    border-bottom: 1px solid rgb(84 84 84 / 0.7);
+}
+
+@media screen and (min-width: 768px) {
+    .header {
+        padding: 45px 0 41px;
+        margin: 0 19px;
+    }
+}

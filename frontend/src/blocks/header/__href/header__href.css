@@ -1,0 +1,12 @@
+.header__href {
+    font-size: 18px;
+    line-height: 22px;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.header__exit {
+    color: #A9A9A9;
+    margin-left: 24px;
+    cursor: pointer;
+}

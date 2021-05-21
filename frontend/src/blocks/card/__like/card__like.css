@@ -1,0 +1,18 @@
+.card__like {
+    flex: none;
+    width: 20px;
+    height: 18px;
+    cursor: pointer;
+    border: none;
+    padding: 0;
+    outline: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url('../../../images/like.svg');
+    background-color: #fff;
+    transition: .3s;
+}
+
+.card__like_active {
+    background-image: url('../../../images/like_active.svg');
+}

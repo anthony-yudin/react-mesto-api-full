@@ -1,0 +1,58 @@
+@import "vendor/normalize.css";
+@import "vendor/fonts/fonts.css";
+@import "blocks/page/page.css";
+@import "blocks/container/container.css";
+
+
+@import "blocks/header/header.css";
+@import "blocks/header/__logo/header__logo.css";
+@import "blocks/header/__href/header__href.css";
+
+@import "blocks/profile/profile.css";
+@import "blocks/profile/__img-box/profile__img-box.css";
+@import "blocks/profile/__img/profile__img.css";
+@import "blocks/profile/__fio-box/profile__fio-box.css";
+@import "blocks/profile/__fio/profile__fio.css";
+@import "blocks/profile/__edit/profile__edit.css";
+@import "blocks/profile/__about/profile__about.css";
+@import "blocks/profile/__add/profile__add.css";
+@import "blocks/profile/__info/profile__info.css";
+
+@import "blocks/cards/cards.css";
+
+@import "blocks/card/card.css";
+@import "blocks/card/__img/card__img.css";
+@import "blocks/card/__content/card__content.css";
+@import "blocks/card/__title/card__title.css";
+@import "blocks/card/__like-info/card__like-info.css";
+@import "blocks/card/__like/card__like.css";
+@import "blocks/card/__like-count/card__like-count.css";
+@import "blocks/card/__delete/card__delete.css";
+
+@import "blocks/footer/footer.css";
+
+@import "blocks/popup/popup.css";
+@import "blocks/popup/_opened/popup_opened.css";
+@import "blocks/popup/__container/popup__container.css";
+@import "blocks/popup/__form/popup__form.css";
+@import "blocks/popup/__title/popup__title.css";
+@import "blocks/popup/__title/__title_form_confirm/popup__title_form_confirm.css";
+@import "blocks/popup/__input/popup__input.css";
+@import "blocks/popup/__input/_error/popup__input_error.css";
+@import "blocks/popup/__text-error/popup__text-error.css";
+@import "blocks/popup/__btn/popup__btn.css";
+@import "blocks/popup/__btn/_disabled/popup__btn_disabled.css";
+@import "blocks/popup/__close/popup__close.css";
+@import "blocks/popup/__container/_image/popup__container_image.css";
+@import "blocks/popup/__title-image/popup__title-image.css";
+@import "blocks/popup/__image/popup__image.css";
+@import "blocks/popup/__form-message-img/popup__form-message-img.css";
+@import "blocks/popup/__form-message-img/_success/popup__form-message-img_success.css";
+@import "blocks/popup/__form-message-text/popup__form-message-text.css";
+
+@import "blocks/sign/sign.css";
+@import "blocks/sign/__btn/sign__btn.css";
+@import "blocks/sign/__input/sign__input.css";
+@import "blocks/sign/__signature/sign__signature.css";
+@import "blocks/sign/__title/sign__title.css";
+@import "blocks/sign/__href/sign__href.css";

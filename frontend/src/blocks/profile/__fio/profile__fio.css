@@ -1,0 +1,25 @@
+.profile__fio {
+    margin: 0;
+    font-weight: 500;
+    font-size: 27px;
+    line-height: 33px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 220px;
+    padding: 0 15px;
+}
+
+@media screen and (min-width: 768px) {
+    .profile__fio {
+        font-size: 42px;
+        line-height: 1.14;
+        max-width: 300px;
+    }
+}
+
+@media screen and (min-width: 991px) {
+    .profile__fio {
+        max-width: 460px;
+    }
+}

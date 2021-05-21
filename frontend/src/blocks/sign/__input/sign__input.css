@@ -1,0 +1,10 @@
+.sign__input {
+    width: 100%;
+    color: #fff;
+    outline: none;
+    padding: 13px 0;
+    margin-bottom: 30px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #CCCCCC;
+}
