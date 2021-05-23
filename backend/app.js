@@ -24,6 +24,8 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 const allowedCors = [
   'https://mestofull.nomoredomains.icu',
   'https://mestofull-backend.nomoredomains.club',
+  'http://mestofull.nomoredomains.icu',
+  'http://mestofull-backend.nomoredomains.club',
   'http://localhost:3005',
   'http://localhost:3000',
   'http://localhost:3001',
