@@ -24,17 +24,12 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 const allowedCors = [
   'https://mestofull.nomoredomains.icu',
   'https://mestofull-backend.nomoredomains.club',
-  'http://mestofull.nomoredomains.icu',
-  'http://mestofull-backend.nomoredomains.club',
   'http://localhost:3005',
   'http://localhost:3000',
-  'http://localhost:3001',
 ];
 
 app.use(cors({
   origin: allowedCors,
-  methods: ['GET', 'POST', 'PATCH', 'DELETE', 'PUT'],
-  allowHeaders: ['Content-type', 'Authorization', 'Origin', 'Accept', 'X-Requested-With']
 }));
 app.use(express.json());
 app.use(requestLogger);

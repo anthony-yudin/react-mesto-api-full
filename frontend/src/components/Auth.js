@@ -1,4 +1,4 @@
-const BASE_URL = 'http://mestofull-backend.nomoredomains.club';
+const BASE_URL = 'https://mestofull-backend.nomoredomains.club';
 
 export const register = (password, email) => {
   return fetch(`${BASE_URL}/signup`, {
