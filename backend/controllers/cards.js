@@ -17,8 +17,8 @@ exports.getCards = (req, res, next) => {
 exports.createCard = (req, res, next) => {
   const { name, link } = req.body;
 
-  Card.create({ name, link, owner: req.user._id })
-    .then((card) => res.send({ card }))
+  Card.create({ name, link, owner: req.user._id, likes: [] })
+    .then((card) => res.send(card))
     .catch((err) => {
       if (err.name === 'ValidationError') throw new BadRequestErr('Переданы некорректные данные при создании карточки');
       throw new InternalServerErr('Ошибка на сервере');
@@ -52,7 +52,7 @@ exports.setLike = (req, res, next) => {
         throw new NotFoundError('Карточка не найдена');
       }
 
-      return res.send({ card });
+      return res.send(card);
     })
     .catch(next);
 };
@@ -66,7 +66,7 @@ exports.deleteLike = (req, res, next) => {
         throw new NotFoundError('Карточка не найдена');
       }
 
-      return res.send({ card });
+      return res.send(card);
     })
     .catch(next);
 };

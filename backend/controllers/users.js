@@ -7,17 +7,18 @@ const BadRequestErr = require('../errors/bad-request-err');
 const NotAuthError = require('../errors/not-auth-error');
 const DoubleEmailError = require('../errors/double-email-error');
 
+const { NODE_ENV, JWT_SECRET } = process.env;
+
 exports.login = (req, res, next) => {
   const { email, password } = req.body;
 
   return User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id }, 'some-secret-key', { expiresIn: 3600000 * 24 * 7 });
+      const token = jwt.sign(
+        { _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'some-secret-key', { expiresIn: '7d' },
+      );
 
-      res.cookie('jwt', token, {
-        httpOnly: true,
-      });
-      res.send({ ...user._doc, password: undefined });
+      res.send({ token });
     })
     .catch((err) => {
       throw new NotAuthError(err.message);
@@ -37,19 +38,13 @@ exports.getUsers = (req, res, next) => {
 };
 
 exports.getUser = (req, res, next) => {
-  const {
-    email, password, name, about, avatar,
-  } = req.body;
-
   User.findById(req.user._id)
     .then((user) => {
       if (!user) {
         throw new NotFoundError('Пользователь не найден');
       }
 
-      return res.send({
-        email, password, name, about, avatar,
-      });
+      return res.send(user);
     })
     .catch(next);
 };
@@ -102,7 +97,7 @@ exports.updateUserAvatar = (req, res, next) => {
     { avatar: req.body.avatar },
     { new: true, runValidators: true },
   )
-    .then((user) => res.send({ user }))
+    .then((user) => res.send(user))
     .catch((err) => {
       if (err.name === 'ValidationError') throw new BadRequestErr('Переданы некорректные данные при обновлении аватара пользователя');
       throw new InternalServerErr('Ошибка на сервере');

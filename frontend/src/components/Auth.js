@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://auth.nomoreparties.co';
+const BASE_URL = 'https://mestofull-backend.nomoredomains.club';
 
 export const register = (password, email) => {
   return fetch(`${BASE_URL}/signup`, {
@@ -27,14 +27,7 @@ export const authorize = (email, password) => {
     },
     body: JSON.stringify({email, password})
   })
-    .then((response => response.json()))
-    .then((data) => {
-      if (data.token){
-        localStorage.setItem('jwt', data.token);
-
-        return data.token;
-      }
-    })
+    .then((res => res.json()))
     .catch(err => console.log(err))
 };
 
@@ -47,6 +40,5 @@ export const getContent = (token) => {
       'Authorization': `Bearer ${token}`,
     }
   })
-    .then(res => res.json())
-    .then(data => data)
+    .then(res => res.json());
 }

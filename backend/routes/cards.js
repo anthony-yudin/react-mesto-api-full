@@ -21,13 +21,13 @@ cardsRoutes.post('/cards', auth, celebrate({
 
 cardsRoutes.delete('/cards/:id', auth, deleteCard);
 
-cardsRoutes.put('/cards/:id/likes', auth, celebrate({
+cardsRoutes.put('/cards/likes/:id', auth, celebrate({
   params: Joi.object().keys({
     id: Joi.string().length(24),
   }),
 }), setLike);
 
-cardsRoutes.delete('/cards/:id/likes', auth, celebrate({
+cardsRoutes.delete('/cards/likes/:id', auth, celebrate({
   params: Joi.object().keys({
     id: Joi.string().length(24),
   }),
