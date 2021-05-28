@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 require('dotenv').config();
 
@@ -9,7 +10,6 @@ const cardsRoutes = require('./routes/cards');
 const { login, createUser } = require('./controllers/users');
 const NotFoundError = require('./errors/not-found-err');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const cors = require('cors');
 
 const { PORT = 3005 } = process.env;
 const app = express();
@@ -34,6 +34,12 @@ app.use(cors({
 app.use(express.json());
 app.use(requestLogger);
 
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
+
 app.post('/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
@@ -47,7 +53,7 @@ app.post('/signup', celebrate({
     password: Joi.string().required().pattern(new RegExp('^[a-zA-Z0-9]{8,30}$')),
     name: Joi.string().min(2).max(30),
     about: Joi.string().min(2).max(30),
-    avatar: Joi.string().pattern(new RegExp(/^(https?:\/\/)(www.)?(([\da-z-])+.)*\w{2,6}(\/[\da-z-]+)*(.[a-z]{1,4})?\/?#?$/)),
+    avatar: Joi.string(),
   }),
 }), createUser);
 
@@ -60,20 +66,6 @@ app.all('*', () => {
 
 app.use(errorLogger);
 app.use(errors());
-
-app.use((err, req, res, next) => {
-  const { statusCode = 500, message } = err;
-
-  if (err.kind === 'ObjectId') {
-    res.status(400).send({ message: 'Неверный формат id' });
-  } else {
-    res.status(statusCode).send({
-      message: statusCode === 500 ? 'На сервере произошла ошибка' : message,
-    });
-  }
-
-  next();
-});
 
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console

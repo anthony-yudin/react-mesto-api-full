@@ -2,6 +2,7 @@ const Card = require('../models/cards');
 const NotFoundError = require('../errors/not-found-err');
 const InternalServerErr = require('../errors/internal-server-err');
 const BadRequestErr = require('../errors/bad-request-err');
+const ForbiddenError = require('../errors/forbidden-error');
 
 exports.getCards = (req, res, next) => {
   Card.find({})
@@ -17,7 +18,9 @@ exports.getCards = (req, res, next) => {
 exports.createCard = (req, res, next) => {
   const { name, link } = req.body;
 
-  Card.create({ name, link, owner: req.user._id, likes: [] })
+  Card.create({
+    name, link, owner: req.user._id, likes: [],
+  })
     .then((card) => res.send(card))
     .catch((err) => {
       if (err.name === 'ValidationError') throw new BadRequestErr('Переданы некорректные данные при создании карточки');
@@ -33,7 +36,7 @@ exports.deleteCard = (req, res, next) => {
         throw new NotFoundError('Карточка не найдена');
       }
       if (req.user._id !== card.owner.toString()) {
-        throw new NotFoundError('Можно удалить только свою карточку!');
+        throw new ForbiddenError('Можно удалить только свою карточку!');
       } else {
         Card.findByIdAndRemove(req.params.id)
           .then(() => res.send(card))

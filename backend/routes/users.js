@@ -14,7 +14,7 @@ usersRoutes.get('/users/me', auth, getUser);
 usersRoutes.get('/users', auth, getUsers);
 usersRoutes.get('/users/:id', auth, celebrate({
   params: Joi.object().keys({
-    id: Joi.string().length(24),
+    id: Joi.string().length(24).pattern(new RegExp('^[0-9]{8,}$')),
   }),
 }), getUserId);
 
@@ -27,7 +27,7 @@ usersRoutes.patch('/users/me', auth, celebrate({
 
 usersRoutes.patch('/users/me/avatar', auth, celebrate({
   body: Joi.object().keys({
-    avatar: Joi.string().pattern(new RegExp(/^(https?:\/\/)(www.)?(([\da-z-])+.)*\w{2,6}(\/[\da-z-]+)*(.[a-z]{1,4})?\/?#?$/)),
+    avatar: Joi.string().required(),
   }),
 }), updateUserAvatar);
 

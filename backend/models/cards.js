@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const validator = require('validator');
 
 const { Schema } = mongoose;
 
@@ -12,6 +13,12 @@ const cardsSchema = Schema({
   link: {
     type: String,
     required: true,
+    validate: {
+      validator(value) {
+        return validator.isURL(value, {require_protocol: true});
+      },
+      message: (props) => `${props.value} - это неправильный url!`,
+    },
   },
   owner: {
     type: Schema.Types.ObjectId,

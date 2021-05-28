@@ -125,7 +125,7 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: 'http://mestofull-backend.nomoredomains.club',
+  baseUrl: 'https://mestofull-backend.nomoredomains.club',
   headers: {
     'Content-Type': 'application/json'
   }
