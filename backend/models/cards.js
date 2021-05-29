@@ -15,7 +15,10 @@ const cardsSchema = Schema({
     required: true,
     validate: {
       validator(value) {
-        return validator.isURL(value, {require_protocol: true});
+        return validator.isURL(value,
+          {
+            require_protocol: true,
+          });
       },
       message: (props) => `${props.value} - это неправильный url!`,
     },

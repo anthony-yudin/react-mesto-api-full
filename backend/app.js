@@ -10,6 +10,7 @@ const cardsRoutes = require('./routes/cards');
 const { login, createUser } = require('./controllers/users');
 const NotFoundError = require('./errors/not-found-err');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const validateLink = require('./middlewares/validateLink');
 
 const { PORT = 3005 } = process.env;
 const app = express();
@@ -50,10 +51,10 @@ app.post('/signin', celebrate({
 app.post('/signup', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
-    password: Joi.string().required().pattern(new RegExp('^[a-zA-Z0-9]{8,30}$')),
+    password: Joi.string().required(),
     name: Joi.string().min(2).max(30),
     about: Joi.string().min(2).max(30),
-    avatar: Joi.string(),
+    avatar: Joi.string().custom(validateLink),
   }),
 }), createUser);
 
@@ -66,6 +67,19 @@ app.all('*', () => {
 
 app.use(errorLogger);
 app.use(errors());
+
+app.use((err, req, res, next) => {
+  const { statusCode = 500, message } = err;
+
+  res
+    .status(statusCode)
+    .send({
+      message: statusCode === 500
+        ? 'На сервере произошла ошибка'
+        : message,
+    });
+  next();
+});
 
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console

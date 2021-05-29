@@ -1,6 +1,7 @@
 const usersRoutes = require('express').Router();
 const { Joi, celebrate } = require('celebrate');
 const auth = require('../middlewares/auth');
+const validateLink = require('../middlewares/validateLink');
 
 const {
   getUser,
@@ -14,7 +15,7 @@ usersRoutes.get('/users/me', auth, getUser);
 usersRoutes.get('/users', auth, getUsers);
 usersRoutes.get('/users/:id', auth, celebrate({
   params: Joi.object().keys({
-    id: Joi.string().length(24).pattern(new RegExp('^[0-9]{8,}$')),
+    id: Joi.string().length(24).hex(),
   }),
 }), getUserId);
 
@@ -27,7 +28,7 @@ usersRoutes.patch('/users/me', auth, celebrate({
 
 usersRoutes.patch('/users/me/avatar', auth, celebrate({
   body: Joi.object().keys({
-    avatar: Joi.string().required(),
+    avatar: Joi.string().required().custom(validateLink),
   }),
 }), updateUserAvatar);
 
