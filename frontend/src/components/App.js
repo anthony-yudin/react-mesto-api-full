@@ -48,7 +48,6 @@ function App() {
     if (token){
       Auth.getContent(token).then((res) => {
         if (res) {
-          setToken(token);
           setEmail(res.email);
           setLoggedIn(true);
           history.push("/");
@@ -64,13 +63,15 @@ function App() {
   React.useEffect(() => {
     const token = localStorage.getItem('token');
 
-    api.initialPage(token)
-      .then(([getUserInfo, getCardList]) => {
-        setCurrentUser(getUserInfo);
-        setCards(getCardList);
-      })
-      .catch(err => console.log(err));
-  }, []);
+    if (token) {
+      api.initialPage(token)
+        .then(([getUserInfo, getCardList]) => {
+          setCurrentUser(getUserInfo);
+          setCards(getCardList);
+        })
+        .catch(err => console.log(err));
+    }
+  }, [token]);
 
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
@@ -190,6 +191,7 @@ function App() {
     localStorage.removeItem('token');
     history.push('/sign-in');
     setToken('');
+    setEmail('');
   }
 
   return (
