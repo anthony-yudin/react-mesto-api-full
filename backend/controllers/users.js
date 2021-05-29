@@ -18,7 +18,7 @@ exports.login = (req, res, next) => {
         { _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'some-secret-key', { expiresIn: '7d' },
       );
 
-      res.send({ user: email, token });
+      res.send({ email: email, token });
     })
     .catch((err) => {
       throw new NotAuthError(err.message);
