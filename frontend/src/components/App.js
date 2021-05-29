@@ -59,7 +59,7 @@ function App() {
 
   React.useEffect(() => {
     tokenCheck();
-  }, tokenCheck);
+  }, []);
 
   React.useEffect(() => {
     const token = localStorage.getItem('token');
@@ -177,11 +177,11 @@ function App() {
     Auth.authorize(email, password)
       .then((data) => {
         if (data){
+          localStorage.setItem('token', data.token);
           setLoggedIn(true);
           history.push('/');
           setToken(data);
           setEmail(data.email);
-          localStorage.setItem('token', data.token);
         }
       })
       .catch(err => console.log(err));
