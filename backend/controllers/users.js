@@ -18,10 +18,9 @@ exports.login = (req, res, next) => {
         { _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'some-secret-key', { expiresIn: '7d' },
       );
 
-      const test = NODE_ENV === 'production2' ? JWT_SECRET : 'some-secret-key';
-
       res.send({
-        test,
+        email,
+        token,
       });
     })
     .catch((err) => {
