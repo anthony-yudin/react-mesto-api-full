@@ -20,7 +20,11 @@ cardsRoutes.post('/cards', auth, celebrate({
   }),
 }), createCard);
 
-cardsRoutes.delete('/cards/:id', auth, deleteCard);
+cardsRoutes.delete('/cards/:id', auth, celebrate({
+  params: Joi.object().keys({
+    id: Joi.string().length(24).hex(),
+  }),
+}), deleteCard);
 
 cardsRoutes.put('/cards/:id/likes', auth, celebrate({
   params: Joi.object().keys({

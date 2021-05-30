@@ -12,8 +12,8 @@ const NotFoundError = require('./errors/not-found-err');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const validateLink = require('./middlewares/validateLink');
 
-const { PORT = 3005 } = process.env;
 const app = express();
+const { PORT = 3005 } = process.env;
 
 mongoose.connect('mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
