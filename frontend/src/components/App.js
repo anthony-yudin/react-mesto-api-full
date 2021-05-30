@@ -180,7 +180,7 @@ function App() {
           localStorage.setItem('token', data.token);
           setLoggedIn(true);
           history.push('/');
-          setToken(data);
+          setToken(data.token);
           setEmail(data.email);
         }
       })
